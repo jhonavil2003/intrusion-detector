@@ -9,10 +9,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Create non-root user (UID 1000 to match common EFS access point defaults)
-RUN useradd -m -u 1000 appuser
-USER appuser
-
 # Copy source
 COPY --chown=appuser:appuser worker/entrypoint/worker.py .
 
