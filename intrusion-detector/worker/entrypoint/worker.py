@@ -11,14 +11,12 @@ def main():
     cfg = Settings.from_env()
     if not cfg.queue_url: raise SystemExit("AUTH_ATTEMPTS_QUEUE_URL no configurado")
     consumer = SQSConsumer(cfg.region, cfg.queue_url)
-    log.info("Status", consumer.__getstate__())
-    log.info("Worker iniciado - cola=%s region=%s", cfg.queue_url, cfg.region)
+    log.info("Worker iniciado - cola= %s region= %s", cfg.queue_url, cfg.region)
+    log.info("Worker iniciado - maxmess=%s wait=%s timeout=%s", cfg.max_number_of_messages, cfg.wait_time_seconds, cfg.visibility_timeout)
     while True:
         for msg in consumer.receive(cfg.max_number_of_messages, cfg.wait_time_seconds, cfg.visibility_timeout):
-            log.info("Mensaje Procesado: %s", payload)
             payload = extract(msg.body)
             try:
-
                 log.info("Mensaje Procesado: %s", payload)
                 consumer.delete(msg.receipt)
             except Exception as e:

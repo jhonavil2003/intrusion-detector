@@ -21,7 +21,7 @@ class Settings:
         g = os.getenv
         return Settings(
             region=g("AWS_REGION") or g("AWS_DEFAULT_REGION") or "us-east-1",
-            queue_url=g("AUTH_ATTEMPTS_QUEUE_URL", "https://sqs.us-east-1.amazonaws.com/713843767123/auth-attempts-dlq"),
+            queue_url=g("AUTH_ATTEMPTS_QUEUE_URL", ""),
             profiles_path=g("PROFILES_PATH", "/data/profiles.json"),
             wait_time_seconds=int(g("WAIT_TIME_SECONDS", "20")),
             visibility_timeout=int(g("VISIBILITY_TIMEOUT", "60")),
