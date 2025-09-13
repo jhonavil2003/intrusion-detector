@@ -5,15 +5,15 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Settings:
-    region: str;
-    queue_url: str;
+    region: str
+    queue_url: str
     profiles_path: str
-    wait_time_seconds: int;
-    visibility_timeout: int;
+    wait_time_seconds: int
+    visibility_timeout: int
     max_number_of_messages: int
-    publish_sns: bool;
-    topic_risk_scores: str | None;
-    topic_decisions: str | None;
+    publish_sns: bool
+    topic_risk_scores: str | None
+    topic_decisions: str | None
     topic_challenges: str | None
 
     @staticmethod

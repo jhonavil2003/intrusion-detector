@@ -1,7 +1,7 @@
 FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
-RUN addgroup --system app && adduser --system --ingroup app app
+RUN groupadd -g 1000 app && useradd -m -u 1000 -g 1000 app
 WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt

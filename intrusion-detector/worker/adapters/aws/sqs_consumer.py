@@ -4,7 +4,7 @@ from ...ports.messages import Message, QueueConsumer
 
 class SQSConsumer(QueueConsumer):
     def __init__(self, region: str, queue_url: str):
-        self.queue_url = queue_url;
+        self.queue_url = queue_url
         self.client = boto3.client("sqs", region_name=region)
 
     def receive(self, max_messages: int, wait_time_seconds: int, visibility_timeout: int):
