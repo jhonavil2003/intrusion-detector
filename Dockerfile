@@ -1,16 +1,16 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
-# Prevent Python from writing .pyc files and force stdout/stderr unbuffered
-ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
-
+RUN addgroup --system app && adduser --system --ingroup app app
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN python -m pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy source
-COPY --chown=appuser:appuser worker/entrypoint/worker.py .
+COPY --chown=app:app intrusion-detector /app/intrusion-detector
 
-# Run
-CMD ["python", "worker.py"]
+RUN mkdir -p /data && chown -R app:app /data
+VOLUME ["/data"]
+USER app
+
+ENTRYPOINT ["python", "-m", "intrusion-detector.worker.entrypoint.worker"]
