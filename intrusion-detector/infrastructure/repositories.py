@@ -1,4 +1,4 @@
-import json, os
+import json, os, logging
 from typing import Iterable, Optional, List
 from ..domain.entities import UserProfile
 from ..domain.repositories import UserProfileRepository, RiskEventRepository
@@ -13,6 +13,10 @@ class FileUserProfileRepository(UserProfileRepository):
     def get(self, user_id: str) -> Optional[UserProfile]:
         data = json.load(open(self.path))
         d = data.get(user_id)
+        level = os.getenv("LOG_LEVEL", "INFO").upper()
+        logging.basicConfig(format="%(asctime)s %(levelname)s %(name)s %(message)s", level=level)
+        log = logging.getLogger("intrusion-detector.intrusion-detector")
+        log.info("Procesado: %s", d)
         if not d: return None
         up = UserProfile(user_id=user_id, known_devices=set(d.get("known_devices", [])),
                          typical_hours=set(d.get("typical_hours", [])),

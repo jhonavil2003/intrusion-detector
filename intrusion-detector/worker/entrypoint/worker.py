@@ -25,6 +25,7 @@ def main():
         for msg in consumer.receive(cfg.max_number_of_messages, cfg.wait_time_seconds, cfg.visibility_timeout):
             payload = extract(msg.body)
             try:
+                log.info("Msg: %s", payload)
                 result = processor.handle(payload)
                 log.info("Procesado: %s", result)
                 consumer.delete(msg.receipt)
