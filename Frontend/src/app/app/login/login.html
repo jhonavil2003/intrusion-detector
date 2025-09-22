@@ -1,0 +1,37 @@
+<div class="max-w-md mx-auto p-6 space-y-4">
+  @if (challengeSession) {
+    <div>
+      <hr/>
+      <p>Se requiere OTP (CUSTOM_CHALLENGE). Ingresa el código:</p>
+      <input [(ngModel)]="otp" placeholder="Código"/>
+      <button (click)="answer()">Verificar</button>
+    </div>
+  }
+
+  @if (lastResult) {
+    <pre>{{ lastResult | json }}</pre>
+  }
+</div>
+
+<main class="form-signin container mt-5 w-100 m-auto">
+  <form (submit)="onSubmit($event)">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <div class="form-floating"><input [(ngModel)]="username" name="username" type="email" class="form-control" id="floatingInput"
+                                      placeholder="name@example.com"> <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating"><input [(ngModel)]="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label></div>
+    <div class="form-floating"><input [(ngModel)]="deviceId"  name="deviceId" type="text" class="form-control" id="floatingDevice" placeholder="Device">
+      <label for="floatingDevice">Device</label></div>
+    <div class="form-floating"><input [(ngModel)]="country"  name="country" type="text" class="form-control" id="floatingCountry" placeholder="Country">
+      <label for="floatingCountry">Country</label></div>
+    <div class="form-floating"><input [(ngModel)]="lat"  name="lat" type="number" class="form-control" id="floatingLat" placeholder="Latitud">
+      <label for="floatingLat">Country</label></div>
+    <div class="form-floating"><input [(ngModel)]="lon"  name="lon" type="number" class="form-control" id="floatingLon" placeholder="Longitud">
+      <label for="floatingLon">Country</label></div>
+    <div class="form-floating"><input [(ngModel)]="ip"  name="ip" type="text" class="form-control" id="floatingIp" placeholder="IP Address">
+      <label for="floatingIp">Ip Address</label></div>
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-body-secondary">© 2025</p></form>
+</main>
