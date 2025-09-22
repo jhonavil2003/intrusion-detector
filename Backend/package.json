@@ -1,0 +1,19 @@
+
+{
+  "name": "cognito-srp-helper-backend",
+  "version": "1.0.0",
+  "description": "Backend Node/Express con SRP para Amazon Cognito usando cognito-srp-helper",
+  "type": "module",
+  "scripts": {
+    "start": "node auth.server.srp.js",
+    "dev": "node --inspect=0.0.0.0:9229 --watch --env-file=.env auth.server.srp.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.637.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cognito-srp-helper": "^2.3.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
