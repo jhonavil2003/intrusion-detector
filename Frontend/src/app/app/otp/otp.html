@@ -1,0 +1,12 @@
+<div class="auth-card">
+  <h2>Verificación adicional</h2>
+  <p>Ingresa el código enviado a tu celular por mensaje de texto.</p>
+  <form (ngSubmit)="confirm()">
+    <label>Código</label>
+    <input type="text" [(ngModel)]="code" name="code" required maxlength="6"/>
+    <button [disabled]="loading">Confirmar</button>
+  </form>
+  @if(error){
+    <p class="error">{{ error }}</p>
+  }
+</div>
